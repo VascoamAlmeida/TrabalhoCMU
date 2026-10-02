@@ -1,22 +1,24 @@
-# Dependencies
-**/node_modules/
+# Android / Gradle
+.gradle/
+build/
+**/build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
 
-# Environment / secrets
-.env
-**/.env
-
-# Runtime uploads
-backoffice/public/uploads/companyLogos/*
-!backoffice/public/uploads/companyLogos/.gitkeep
-
-# Angular / coverage
-frontoffice/dist/
-frontoffice/.angular/
-**/coverage/
-
-# Editors / OS
-.vscode/
+# Android Studio / IntelliJ
 .idea/
+*.iml
+
+# Secrets / local configuration
+google-services.json
+.env
+.env.*
+secrets.properties
+*.jks
+*.keystore
+
+# OS files
 .DS_Store
 Thumbs.db
-*.log

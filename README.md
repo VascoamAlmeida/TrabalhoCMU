@@ -1,168 +1,67 @@
-# Textile Donation Platform
+# 75 Hard Android Prototype
 
-Academic full-stack web application for managing textile donation requests, beneficiary entities and a points-to-voucher reward system.
+Academic Android prototype developed for a **Mobile and Ubiquitous Computing** course project during the 2024/2025 academic year.
 
-The project was originally developed as a **group academic assignment** for a Web Programming course. This repository is a cleaned portfolio version of that work: personal/group-identifying information, test credentials, runtime uploads and hard-coded secrets were removed.
+The project explores an Android interface for tracking activities related to the **75 Hard challenge**, using **Kotlin**, **Jetpack Compose** and **Navigation Compose**.
 
-## Overview
+> This repository contains the prototype version that was preserved from the original academic work. It does **not** implement every requirement from the final assignment specification.
 
-The application models a textile donation platform with two interfaces:
+## Implemented prototype scope
 
-- **Backoffice** — Node.js, Express and EJS interface for administrators and employees.
-- **Frontoffice** — Angular application for donors and beneficiary entities.
+- Android application written in Kotlin
+- Jetpack Compose user interface
+- Navigation between application screens
+- Login/user identifier prototype
+- Main dashboard/navigation screen
+- Prototype screens for:
+  - challenge progress
+  - workouts
+  - water tracking
+  - food
+  - reading
+  - sleep
+- Initial Room entity model for a user
 
-Data is stored in MongoDB through Mongoose, while the Angular client communicates with the backend through a documented REST API.
-
-## Main features
-
-### Backoffice
-
-- Authentication with JWT-based sessions.
-- Separate administrator and employee access.
-- Management of users, beneficiary entities and donation requests.
-- Approval of beneficiary entities before they can sign in to the frontoffice.
-- Donation workflow management.
-- Voucher management.
-- Dashboard with donation statistics and charts.
-- Swagger documentation for the REST API.
-
-### Frontoffice
-
-- Donor registration and authentication.
-- Beneficiary entity registration with backoffice approval.
-- Search and browsing of approved beneficiary entities.
-- Creation of textile donation requests.
-- Immediate points estimate using the original project rule of one point per donated item.
-- Donor donation history and current points balance.
-- Beneficiary donation history.
-- Beneficiary workflow actions: accept, cancel and complete donation requests.
-- Conversion of accumulated points into discount vouchers.
-
-## Technology stack
-
-- **Backend:** Node.js, Express.js, EJS
-- **Frontend:** Angular 18, TypeScript, Angular Material, Bootstrap
-- **Database:** MongoDB / Mongoose
-- **Authentication:** JSON Web Tokens (JWT), bcrypt
-- **API documentation:** Swagger UI
-- **Charts:** Google Charts
+Several feature screens remain placeholders because this repository reflects the available prototype rather than a reconstructed final submission.
 
 ## Project structure
 
 ```text
-.
-├── backoffice/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── scripts/
-│   ├── swagger/
-│   ├── views/
-│   ├── app.js
-│   └── package.json
-├── frontoffice/
-│   ├── src/app/
-│   ├── src/assets/
-│   └── package.json
-├── .env.example
-└── README.md
+app/src/main/java/ip/ipp/estg/desafio_75_hard/
+├── MainActivity.kt
+├── EntryScreen.kt
+├── LoginScreen.kt
+├── StartJourneyPage.kt
+├── MainPageScreen.kt
+├── ChallengeProgressScreen.kt
+├── WorkoutScreen.kt
+├── WaterScreen.kt
+├── FoodScreen.kt
+├── BookScreen.kt
+├── SleepScreen.kt
+├── userID.kt
+├── Models/
+│   └── User.kt
+└── ui/theme/
 ```
 
 ## Requirements
 
-- Node.js 20 or later recommended
-- npm
-- MongoDB (local installation or MongoDB Atlas)
+- Android Studio
+- Android SDK 34
+- JDK compatible with the Android Gradle Plugin used by the project
 
-## Configuration
+## Running the project
 
-The repository does **not** contain database passwords, JWT secrets or login credentials.
+1. Clone the repository.
+2. Open the project in Android Studio.
+3. Allow Gradle to synchronize the dependencies.
+4. Run the `app` configuration on an Android emulator or physical device with Android 9 (API 28) or newer.
 
-Set the following environment variables before starting the backend:
+## Privacy and repository cleanup
 
-```text
-MONGODB_URI=mongodb://127.0.0.1:27017/recicla_textil
-JWT_SECRET=replace-with-a-random-secret
-PORT=3000
-```
+The public portfolio version intentionally excludes local IDE configuration, credentials, synchronization tokens and other machine-specific/private files from the original academic archive. An image asset of uncertain redistribution provenance was also removed and replaced with a Compose-only header. An unused plaintext-password field from the early Room prototype was removed rather than publishing an insecure storage pattern.
 
-`.env.example` is provided only as a reference. The current application reads the values from the process environment.
+## Academic context
 
-### PowerShell example
-
-```powershell
-$env:MONGODB_URI="mongodb://127.0.0.1:27017/recicla_textil"
-$env:JWT_SECRET="development-secret"
-```
-
-## Installation
-
-### 1. Backoffice / REST API
-
-```bash
-cd backoffice
-npm install
-npm start
-```
-
-The backend runs on `http://localhost:3000` by default.
-
-Swagger UI is available at:
-
-```text
-http://localhost:3000/api/v1/api-docs
-```
-
-### 2. Create the first administrator
-
-On a new database, set the administrator credentials in environment variables and run:
-
-```powershell
-$env:ADMIN_NAME="Administrator"
-$env:ADMIN_EMAIL="admin@example.com"
-$env:ADMIN_PASSWORD="choose-a-password"
-npm run create-admin
-```
-
-No administrator password is stored in the repository.
-
-### 3. Frontoffice
-
-Open another terminal:
-
-```bash
-cd frontoffice
-npm install
-npm start
-```
-
-The Angular application runs on `http://localhost:4200`.
-
-## Donation workflow
-
-A donation request follows the original project states:
-
-```text
-Inicio -> Curso -> Fim
-   |        
-   └-> Cancelado
-```
-
-A donor creates a request in `Inicio`. The selected beneficiary entity may accept it (`Curso`) or cancel it. Once an accepted donation is completed, it moves to `Fim` and the donor receives the corresponding points.
-
-## Security / portfolio cleanup
-
-Before publication, the project was cleaned to avoid exposing development data:
-
-- MongoDB credentials were removed from source code.
-- The JWT secret is no longer hard-coded as a production credential.
-- Test login credentials were removed.
-- Password hashes are no longer returned by REST endpoints.
-- Runtime-uploaded beneficiary logos are ignored by Git.
-- Login passwords are no longer printed to the browser console.
-- Backoffice access is restricted to administrators and employees.
-- Entity workflow actions verify that the donation belongs to the authenticated entity.
-
-## Notes
-
-This repository intentionally stays close to the scope of the original academic assignment rather than turning it into a new production product. The purpose is to demonstrate the original full-stack work, architecture and required workflow with a small number of correctness and security fixes needed for a public portfolio repository.
+This project was originally developed as part of a group academic assignment. This repository is presented as a portfolio snapshot of the implementation that remained available, without claiming completion of functionality that is not present in the source code.
